@@ -12,7 +12,6 @@ class nagios::plugins {
         ensure  => directory,
         source  => "puppet:///nagios/plugins",
         recurse => true,
-        ignore  => ".svn",
         require => Package["nagios-plugins"],
     }
 

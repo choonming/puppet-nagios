@@ -1,0 +1,85 @@
+#!/usr/bin/env python
+
+# Standard Nagios return codes
+OK       = 0
+WARNING  = 1
+CRITICAL = 2
+UNKNOWN  = 3
+
+import os
+import sys
+from datetime import datetime, timedelta
+from optparse import OptionParser
+
+__title__   = "Nagios Plugin for Checking Puppetd Locks"
+__version__ = 0.1
+
+def end(status, message):
+    """Prints a message and exits. First arg is the status code
+    Second Arg is the string message"""
+    
+    if status == OK:
+        print "OK: %s" % (message)
+        sys.exit(OK)
+    elif status == WARNING:
+        print "WARNING: %s" % (message)
+        sys.exit(WARNING)
+    elif status == CRITICAL:
+        print "CRITICAL: %s" % (message)
+        sys.exit(CRITICAL)
+    else:
+        # This one is intentionally different
+        print "UNKNOWN: %s" % message
+        sys.exit(UNKNOWN)
+
+class LockCheck:
+    
+    def __init__(self):
+        """Initializes all variables to their default states"""
+
+    def lock_check(self):
+
+        puppet_lock_file    = "/var/lib/puppet/state/puppetdlock"
+        five_minutes_ago    = datetime.now() - timedelta(minutes=2)
+        ten_minutes_ago     = datetime.now() - timedelta(minutes=10)
+
+        if os.path.exists(puppet_lock_file) and os.path.isfile(puppet_lock_file):
+            lock_ctime          = datetime.fromtimestamp(os.path.getctime(puppet_lock_file))
+            if lock_ctime > five_minutes_ago:
+                end(WARNING, "Puppetd has been locked for more than 5 minutes since %s" % lock_ctime)
+            elif lock_ctime > ten_minutes_ago:
+                end(CRITICAL, "Puppetd has been locked for more than 10 minutes since %s" % lock_ctime)
+        else:
+            end(OK, "Puppetd is not locked")
+
+def main():
+    """Parses args and calls func to test puppetd file lock"""
+
+    check = LockCheck()
+    parser = OptionParser()
+
+    parser.add_option( "-v",
+                       "--version",
+                       action   = "store_true",
+                       dest     = "version",
+                       help     = "Print version number")
+
+    (options, args) = parser.parse_args()
+
+    if args:
+        parser.print_help()
+        sys.exit(UNKNOWN)
+
+    if options.version:
+        print "%s %s" % (__title__, __version__)
+        sys.exit(UNKNOWN)
+
+    check.lock_check()
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        print "Caught Control-C..."
+        sys.exit(CRITICAL)
+

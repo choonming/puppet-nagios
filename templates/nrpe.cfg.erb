@@ -32,7 +32,7 @@ pid_file=/var/run/nagios/nrpe.pid
 # NOTE: This must be a non-priviledged port (i.e. > 1024).
 # NOTE: This option is ignored if NRPE is running under either inetd or xinetd
 
-server_port=5666
+server_port=<%= nrpe_port %>
 
 
 
@@ -76,7 +76,7 @@ nrpe_group=nagios
 #
 # NOTE: This option is ignored if NRPE is running under either inetd or xinetd
 # [ALVIN] - added probers IP for development purposes. Control port access by iptables
-allowed_hosts=192.168.1.22,216.12.214.132,216.12.214.129
+allowed_hosts=<%= nagios_server_ip %>
  
 
 

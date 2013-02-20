@@ -12,6 +12,7 @@ class nagios::agent {
     # TODO: add firewall rules [Done for 5666/nrpe - alvin]
 
     include nagios::plugins
+    include nagios::basechecks
 
     package { "nagios-nrpe-server":
         ensure => installed,
@@ -22,7 +23,7 @@ class nagios::agent {
     }
 
     file { "/etc/nagios/nrpe.cfg":
-        source  => "puppet:///nagios/nrpe.cfg",
+        content => template('nagios/nrpe.cfg.erb'),
         require => Package["nagios-nrpe-server"],
         mode    => 0644 , 
         owner   => "root" ,
@@ -56,19 +57,5 @@ class nagios::agent {
         use         => "generic-host",
         tag         => $domain,
     }
-
-    firewall { '100 nrpe':
-      chain   => 'INPUT',
-      action  => 'accept',
-      proto   => 'tcp',
-      dport   => '5666',
-    }
-#
-#    iptables::rule { "nrpe":
-#        rule    => $environment ? {
-#            alpha => "-A SERVICES -p tcp --dport 5666 -j allow_from_alpha",
-#            default => "-A SERVICES -p tcp --dport 5666 -j allow_from_monitoring",
-#        }
-#    }
 
 }
