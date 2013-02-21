@@ -32,7 +32,7 @@ class nagios::agent {
 
     # custom written commands not available from /etc/nagios-plugins/config/
     file { "/etc/nagios-plugins/config/custom_commands.cfg":
-        source  => "puppet:///nagios/custom_commands.cfg",
+        source  => "puppet:///modules/nagios/custom_commands.cfg",
         require => Package["nagios-nrpe-server"],
         mode    => 0644 ,
         owner   => "root" ,

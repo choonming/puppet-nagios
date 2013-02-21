@@ -35,7 +35,7 @@ class nagios {
   }  
 
   file {"/etc/nagios3/conf.d/generic-service_nagios2.cfg":
-    source  => "puppet:///nagios/generic-service_nagios2.cfg",
+    source  => "puppet:///modules/nagios/generic-service_nagios2.cfg",
     require => Package["nagios3"],
     mode    => 0644,
     owner   => "root",
