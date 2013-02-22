@@ -44,7 +44,7 @@ class nagios (
     mode    => 0644,
     owner   => "root",
     group   => "root",
-    notify  => Exec["reload-nagios"],
+    notify  => Service['nagios3'],
   }
 
   Nagios_host <<| |>> {
