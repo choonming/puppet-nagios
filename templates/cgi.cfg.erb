@@ -114,7 +114,7 @@ use_ssl_authentication=0
 # not use authorization.  You may use an asterisk (*) to
 # authorize any user who has authenticated to the web server.
 
-authorized_for_system_information=<%= nagios_http_username %>
+authorized_for_system_information=<%= users %>
 
 
 
@@ -126,7 +126,7 @@ authorized_for_system_information=<%= nagios_http_username %>
 # an asterisk (*) to authorize any user who has authenticated
 # to the web server.
 
-authorized_for_configuration_information=<%= nagios_http_username %>
+authorized_for_configuration_information=<%= users %>
 
 
 
@@ -139,7 +139,7 @@ authorized_for_configuration_information=<%= nagios_http_username %>
 # You may use an asterisk (*) to authorize any user who has
 # authenticated to the web server.
 
-authorized_for_system_commands=<%= nagios_http_username %>
+authorized_for_system_commands=<%= users %>
 
 
 
@@ -152,8 +152,8 @@ authorized_for_system_commands=<%= nagios_http_username %>
 # to authorize any user who has authenticated to the web server.
 
 
-authorized_for_all_services=<%= nagios_http_username %>
-authorized_for_all_hosts=<%= nagios_http_username %>
+authorized_for_all_services=<%= users %>
+authorized_for_all_hosts=<%= users %>
 
 
 
@@ -166,8 +166,8 @@ authorized_for_all_hosts=<%= nagios_http_username %>
 # authorization).  You may use an asterisk (*) to authorize any
 # user who has authenticated to the web server.
 
-authorized_for_all_service_commands=<%= nagios_http_username %>
-authorized_for_all_host_commands=<%= nagios_http_username %>
+authorized_for_all_service_commands=<%= users %>
+authorized_for_all_host_commands=<%= users %>
 
 
 
