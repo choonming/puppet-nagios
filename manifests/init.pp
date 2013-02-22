@@ -16,6 +16,8 @@ class nagios (
 
   service { "nagios3":
     ensure      => running,
+    hasstatus   => true,
+    hasrestart  => true,
     require     => [ Package["nagios3"], Package["nagios-nrpe-plugin"] ],
   }
 
