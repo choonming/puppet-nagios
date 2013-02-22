@@ -10,7 +10,7 @@ class nagios::plugins {
     
     file { "/usr/lib/nagios/plugins":
         ensure  => directory,
-        source  => "puppet:///nagios/plugins",
+        source  => "puppet:///modules/nagios/plugins",
         recurse => true,
         require => Package["nagios-plugins"],
     }
