@@ -1,4 +1,8 @@
-class nagios {
+class nagios (
+  $nrpe_port  = '5666',
+  $users,
+  $server_ip
+  ) {
     # It takes advantage of puppet's collected resources, which lets other
     # puppet-managed servers configure this nagios monitor with the checks
     # that they need. Docs @ http://reductivelabs.com/trac/puppet/wiki/ExportedResources 
@@ -28,7 +32,7 @@ class nagios {
   }
 
   file { "cgi.cfg" :
-    name    => "/etc/nagios3/cgi.cfg",
+    path    => "/etc/nagios3/cgi.cfg",
     content => template("nagios/cgi.cfg.erb"),
     mode    => 644,
     notify  => Service['nagios3']
