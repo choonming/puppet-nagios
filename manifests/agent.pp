@@ -55,7 +55,6 @@ class nagios::agent {
         ensure      => present,
         address     => $fqdn,
         use         => "generic-host",
-        tag         => $domain,
     }
 
 }
