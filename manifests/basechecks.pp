@@ -10,7 +10,6 @@ class nagios::basechecks {
         use                 => "generic-service",
         check_command       => "check_ping!600,20%!1000,50%",
         service_description => "check_ping",
-        tag                 => $domain,
      }
 
     @@nagios_service { "check_puppetd_lock_$fqdn":
@@ -18,7 +17,6 @@ class nagios::basechecks {
         use                 => "generic-service",
         check_command       => "check_nrpe_1arg!check_puppetd_lock",
         service_description => "check_puppetd_lock",
-        tag                 => $domain,
     }
 
     nagios::nrpe { "check_puppetd_lock":
@@ -30,7 +28,6 @@ class nagios::basechecks {
         use                 => "generic-service",
         host_name           => $fqdn,
         service_description => "check_disk",
-        tag                 => $domain,
     }
 
     nagios::nrpe { "check_disk" :
@@ -42,7 +39,6 @@ class nagios::basechecks {
         use                 => "generic-service",
         host_name           => $fqdn,
         service_description => "check_load",
-        tag                 => $domain,
     }
 
     nagios::nrpe { "check_load" :
@@ -55,7 +51,6 @@ class nagios::basechecks {
             use                 => "generic-service",
             host_name           => $fqdn,
             service_description => "check_apt_upgrade",
-            tag                 => $domain,
             check_interval      => 60,
             retry_interval      => 60,
         }

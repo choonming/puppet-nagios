@@ -56,7 +56,7 @@ class nagios (
   }
 
   Nagios_service <<| |>> {
-    target  => "/etc/nagios/conf.d/${::fqdn}.cfg",
+    target  => "/etc/nagios3/conf.d/services.cfg",
     require => Package['nagios3'],
     notify  => Service['nagios3'],
   }

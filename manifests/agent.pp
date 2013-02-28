@@ -1,4 +1,8 @@
-class nagios::agent {
+class nagios::agent (
+  $nrpe_port = '5666',
+  $server_ip
+  ) {
+
     # nagios::agent defines a nagios agent (i.e. the server that is being
     # monitored). It must be included in every server that needs to be
     # monitored, ideally as part of the base configuration. This is because
@@ -55,7 +59,6 @@ class nagios::agent {
         ensure      => present,
         address     => $fqdn,
         use         => "generic-host",
-        tag         => $domain,
     }
 
 }
