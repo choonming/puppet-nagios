@@ -16,7 +16,6 @@ class nagios::agent (
     # TODO: add firewall rules [Done for 5666/nrpe - alvin]
 
     include nagios::plugins
-    include nagios::basechecks
 
     package { "nagios-nrpe-server":
         ensure => installed,

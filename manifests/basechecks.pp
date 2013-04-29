@@ -57,7 +57,7 @@ class nagios::basechecks {
 
         nagios::nrpe { "check_apt_upgrade" :
             command => "check_apt_upgrade --run-apt",
-            sudo    => true,
+            sudo    => false,
         }
     }
 
