@@ -71,7 +71,7 @@ message_sent_ok=0;
 # Try to send an HTTP POST message (try all servers until successful)
 for server in www ; do
 
-    RESPONSE=`curl -v -d username=$username -d password=$password -d gateway=$gateway -d originator=$sender -d recipients=$number -d message="$message" http://$server.mollie.nl/xml/sms/`
+    RESPONSE=`curl -v -d username=$username -d password=$password -d gateway=$gateway -d originator=$sender -d recipients=$number -d message="$message" https://api.messagebird.com/xml/sms`
 
     # Curl was able to post okay...
     if [ "$?" -eq "0" ]; then
